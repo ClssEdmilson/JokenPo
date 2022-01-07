@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import "dart:math";
 
 void main() {
   runApp(const MyApp());
@@ -16,21 +17,90 @@ class MyApp extends StatelessWidget {
       theme: ThemeData(
         primarySwatch: Colors.blue,
       ),
-      home: const MyHomePage(title: 'JokenPo'),
+      home: const MyHomePage(),
     );
   }
 }
 
 class MyHomePage extends StatefulWidget {
-  const MyHomePage({Key? key, required this.title}) : super(key: key);
+  const MyHomePage({Key? key}) : super(key: key);
 
-  final String title;
 
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
+
+  var imagemApp = AssetImage("imagens/padrao.png");
+  var mensagem = "Escolha uma das opções abaixo";
+  void opcaoSelecionado(String opcao){
+
+    var opcoes = ["pedra", "papel", "tesoura"];
+    var randomica = Random().nextInt(3);
+    var escolhaApp = opcoes[randomica];
+
+    switch(escolhaApp){
+      case "pedra":
+        setState(() {
+          this.imagemApp = AssetImage("imagens/pedra.png");
+        });
+        if(opcao == "pedra"){
+          setState(() {
+            mensagem = "Empatamos!";
+          });
+        }else if(opcao == "tesoura"){
+          setState(() {
+            mensagem = "Você perdeu!";
+          });
+        }
+        else {
+          setState(() {
+            mensagem = "Você ganhou!";
+          });
+        }
+        break;
+      case "papel":
+        setState(() {
+          this.imagemApp = AssetImage("imagens/papel.png");
+        });
+        if(opcao == "pedra"){
+          setState(() {
+            mensagem = "Você perdeu";
+          });
+        }else if(opcao == "tesoura"){
+          setState(() {
+            mensagem = "Você ganhou!";
+          });
+        }
+        else {
+          setState(() {
+            mensagem = "Empatamos!";
+          });
+        }
+        break;
+      case "tesoura":
+        setState(() {
+          this.imagemApp = AssetImage("imagens/tesoura.png");
+        });
+        if(opcao == "pedra"){
+          setState(() {
+            mensagem = "Você ganhou!";
+          });
+        }else if(opcao == "tesoura"){
+          setState(() {
+            mensagem = "Empatamos!";
+          });
+        }
+        else {
+          setState(() {
+            mensagem = "Você perdeu!";
+          });
+        }
+        break;
+    }
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -51,35 +121,40 @@ class _MyHomePageState extends State<MyHomePage> {
               ),
             ),
           ),
-          Image.asset(
-            "imagens/padrao.png",
-            scale: 1.2,
-          ),
-          const Padding(
+          Image(image: imagemApp),
+          Padding(
             padding: EdgeInsets.all(14),
             child: Text(
-              "Escolha uma opção abaixo:",
-              style: TextStyle(
-              fontSize: 24,
-              fontWeight: FontWeight.bold,
+              mensagem,
+              style:  const TextStyle(
+                fontSize: 24,
+                fontWeight: FontWeight.bold,
               ),
             ),
           ),
           Row(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             children: [
-              Image.asset(
-                "imagens/pedra.png",
-                scale: 1.2,
-
+              GestureDetector(
+                onTap: () => opcaoSelecionado("pedra"),
+                child: Image.asset(
+                  "imagens/pedra.png",
+                  scale: 1.2,
+                ),
               ),
-              Image.asset(
-                "imagens/papel.png",
-                scale: 1.2,
+              GestureDetector(
+                onTap: () => opcaoSelecionado("papel"),
+                child: Image.asset(
+                  "imagens/papel.png",
+                  scale: 1.2,
+                ),
               ),
-              Image.asset(
-                "imagens/tesoura.png",
-                scale: 1.2,
+              GestureDetector(
+                onTap: () => opcaoSelecionado("tesoura"),
+                child: Image.asset(
+                  "imagens/tesoura.png",
+                  scale: 1.2,
+                ),
               ),
             ],
           ),
