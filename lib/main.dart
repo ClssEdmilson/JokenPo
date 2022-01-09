@@ -25,36 +25,32 @@ class MyApp extends StatelessWidget {
 class MyHomePage extends StatefulWidget {
   const MyHomePage({Key? key}) : super(key: key);
 
-
   @override
   State<MyHomePage> createState() => _MyHomePageState();
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   var imagemApp = AssetImage("imagens/padrao.png");
   var mensagem = "Escolha uma das opções abaixo";
-  void opcaoSelecionado(String opcao){
-
+  void opcaoSelecionado(String opcao) {
     var opcoes = ["pedra", "papel", "tesoura"];
     var randomica = Random().nextInt(3);
     var escolhaApp = opcoes[randomica];
 
-    switch(escolhaApp){
+    switch (escolhaApp) {
       case "pedra":
         setState(() {
           this.imagemApp = AssetImage("imagens/pedra.png");
         });
-        if(opcao == "pedra"){
+        if (opcao == "pedra") {
           setState(() {
             mensagem = "Empatamos!";
           });
-        }else if(opcao == "tesoura"){
+        } else if (opcao == "tesoura") {
           setState(() {
             mensagem = "Você perdeu!";
           });
-        }
-        else {
+        } else {
           setState(() {
             mensagem = "Você ganhou!";
           });
@@ -64,16 +60,15 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           this.imagemApp = AssetImage("imagens/papel.png");
         });
-        if(opcao == "pedra"){
+        if (opcao == "pedra") {
           setState(() {
             mensagem = "Você perdeu";
           });
-        }else if(opcao == "tesoura"){
+        } else if (opcao == "tesoura") {
           setState(() {
             mensagem = "Você ganhou!";
           });
-        }
-        else {
+        } else {
           setState(() {
             mensagem = "Empatamos!";
           });
@@ -83,16 +78,15 @@ class _MyHomePageState extends State<MyHomePage> {
         setState(() {
           this.imagemApp = AssetImage("imagens/tesoura.png");
         });
-        if(opcao == "pedra"){
+        if (opcao == "pedra") {
           setState(() {
             mensagem = "Você ganhou!";
           });
-        }else if(opcao == "tesoura"){
+        } else if (opcao == "tesoura") {
           setState(() {
             mensagem = "Empatamos!";
           });
-        }
-        else {
+        } else {
           setState(() {
             mensagem = "Você perdeu!";
           });
@@ -126,7 +120,7 @@ class _MyHomePageState extends State<MyHomePage> {
             padding: EdgeInsets.all(14),
             child: Text(
               mensagem,
-              style:  const TextStyle(
+              style: const TextStyle(
                 fontSize: 24,
                 fontWeight: FontWeight.bold,
               ),
