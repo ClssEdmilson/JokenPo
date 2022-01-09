@@ -2,5 +2,5 @@
 
 Aplicativo JokenPo desenvolvido em Flutter!
 
-<img src"joken.gif">
+<img src="joken.gif"/>
 
